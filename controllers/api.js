@@ -14,14 +14,6 @@ const Linkedin = require('node-linkedin')(process.env.LINKEDIN_ID, process.env.L
 const clockwork = require('clockwork')({ key: process.env.CLOCKWORK_KEY });
 const paypal = require('paypal-rest-sdk');
 const lob = require('lob')(process.env.LOB_KEY);
-const ig = require('instagram-node').instagram();
-const foursquare = require('node-foursquare')({
-  secrets: {
-    clientId: process.env.FOURSQUARE_ID,
-    clientSecret: process.env.FOURSQUARE_SECRET,
-    redirectUrl: process.env.FOURSQUARE_REDIRECT_URL
-  }
-});
 
 /**
  * GET /api
@@ -33,39 +25,6 @@ exports.getApi = (req, res) => {
   });
 };
 
-/**
- * GET /api/foursquare
- * Foursquare API example.
- */
-exports.getFoursquare = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'foursquare');
-  async.parallel({
-    trendingVenues: (callback) => {
-      foursquare.Venues.getTrending('40.7222756', '-74.0022724', { limit: 50 }, token.accessToken, (err, results) => {
-        callback(err, results);
-      });
-    },
-    venueDetail: (callback) => {
-      foursquare.Venues.getVenue('49da74aef964a5208b5e1fe3', token.accessToken, (err, results) => {
-        callback(err, results);
-      });
-    },
-    userCheckins: (callback) => {
-      foursquare.Users.getCheckins('self', null, token.accessToken, (err, results) => {
-        callback(err, results);
-      });
-    }
-  },
-  (err, results) => {
-    if (err) { return next(err); }
-    res.render('api/foursquare', {
-      title: 'Foursquare API',
-      trendingVenues: results.trendingVenues,
-      venueDetail: results.venueDetail,
-      userCheckins: results.userCheckins
-    });
-  });
-};
 
 /**
  * GET /api/tumblr
@@ -446,47 +405,6 @@ exports.getLinkedin = (req, res, next) => {
     res.render('api/linkedin', {
       title: 'LinkedIn API',
       profile: $in
-    });
-  });
-};
-
-/**
- * GET /api/instagram
- * Instagram API example.
- */
-exports.getInstagram = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'instagram');
-  ig.use({ client_id: process.env.INSTAGRAM_ID, client_secret: process.env.INSTAGRAM_SECRET });
-  ig.use({ access_token: token.accessToken });
-  async.parallel({
-    searchByUsername: (done) => {
-      ig.user_search('richellemead', (err, users) => {
-        done(err, users);
-      });
-    },
-    searchByUserId: (done) => {
-      ig.user('175948269', (err, user) => {
-        done(err, user);
-      });
-    },
-    popularImages: (done) => {
-      ig.media_popular((err, medias) => {
-        done(err, medias);
-      });
-    },
-    myRecentMedia: (done) => {
-      ig.user_self_media_recent((err, medias) => {
-        done(err, medias);
-      });
-    }
-  }, (err, results) => {
-    if (err) { return next(err); }
-    res.render('api/instagram', {
-      title: 'Instagram API',
-      usernames: results.searchByUsername,
-      userById: results.searchByUserId,
-      popularImages: results.popularImages,
-      myRecentMedia: results.myRecentMedia
     });
   });
 };
