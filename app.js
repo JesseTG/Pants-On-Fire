@@ -157,8 +157,6 @@ app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/api/lob', apiController.getLob);
 app.get('/api/upload', apiController.getFileUpload);
 app.post('/api/upload', upload.single('myFile'), apiController.postFileUpload);
-app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
-app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
 app.get('/api/google-maps', apiController.getGoogleMaps);
 
 /**
@@ -191,10 +189,6 @@ app.get('/auth/linkedin/callback', passport.authenticate('linkedin', { failureRe
 app.get('/auth/tumblr', passport.authorize('tumblr'));
 app.get('/auth/tumblr/callback', passport.authorize('tumblr', { failureRedirect: '/api' }), (req, res) => {
   res.redirect('/api/tumblr');
-});
-app.get('/auth/pinterest', passport.authorize('pinterest', { scope: 'read_public write_public' }));
-app.get('/auth/pinterest/callback', passport.authorize('pinterest', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/api/pinterest');
 });
 
 /**
