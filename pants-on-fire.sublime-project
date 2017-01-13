@@ -2,7 +2,7 @@
   "folders": [
     {
       "path": ".",
-      "folder_exclude_patterns": ["export"],
+      "folder_exclude_patterns": ["node_modules"],
       "file_exclude_patterns": ["tags", ".tags", ".tags_sorted_by_file", ".fuse*"],
       "follow_symlinks": true
     }
