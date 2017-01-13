@@ -137,7 +137,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
  * API examples routes.
  */
 app.get('/api', apiController.getApi);
-app.get('/api/lastfm', apiController.getLastfm);
 app.get('/api/aviary', apiController.getAviary);
 app.get('/api/stripe', apiController.getStripe);
 app.post('/api/stripe', apiController.postStripe);
