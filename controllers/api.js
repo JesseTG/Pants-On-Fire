@@ -249,54 +249,6 @@ exports.postTwitter = (req, res, next) => {
 };
 
 /**
- * GET /api/steam
- * Steam API example.
- */
-exports.getSteam = (req, res, next) => {
-  const steamId = '76561197982488301';
-  const params = { l: 'english', steamid: steamId, key: process.env.STEAM_KEY };
-  async.parallel({
-    playerAchievements: (done) => {
-      params.appid = '49520';
-      request.get({ url: 'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/', qs: params, json: true }, (err, request, body) => {
-        if (request.statusCode === 401) {
-          return done(new Error('Invalid Steam API Key'));
-        }
-        done(err, body);
-      });
-    },
-    playerSummaries: (done) => {
-      params.steamids = steamId;
-      request.get({ url: 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', qs: params, json: true }, (err, request, body) => {
-        if (request.statusCode === 401) {
-          return done(new Error('Missing or Invalid Steam API Key'));
-        }
-        done(err, body);
-      });
-    },
-    ownedGames: (done) => {
-      params.include_appinfo = 1;
-      params.include_played_free_games = 1;
-      request.get({ url: 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/', qs: params, json: true }, (err, request, body) => {
-        if (request.statusCode === 401) {
-          return done(new Error('Missing or Invalid Steam API Key'));
-        }
-        done(err, body);
-      });
-    }
-  },
-  (err, results) => {
-    if (err) { return next(err); }
-    res.render('api/steam', {
-      title: 'Steam Web API',
-      ownedGames: results.ownedGames.response.games,
-      playerAchievemments: results.playerAchievements.playerstats,
-      playerSummary: results.playerSummaries.response.players[0]
-    });
-  });
-};
-
-/**
  * GET /api/stripe
  * Stripe API example.
  */

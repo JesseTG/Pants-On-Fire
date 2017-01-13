@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
   google: String,
   github: String,
   linkedin: String,
-  steam: String,
   tokens: Array,
 
   profile: {
