@@ -134,14 +134,6 @@ app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/api/google-maps', apiController.getGoogleMaps);
 
 /**
- * OAuth authentication routes. (Sign in)
- */
-app.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
-app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect(req.session.returnTo || '/');
-});
-
-/**
  * Error Handler.
  */
 app.use(errorHandler());
