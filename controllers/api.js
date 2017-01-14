@@ -4,9 +4,7 @@ const async = require('async');
 const request = require('request');
 const cheerio = require('cheerio');
 const graph = require('fbgraph');
-const tumblr = require('tumblr.js');
 const Twit = require('twit');
-const Linkedin = require('node-linkedin')(process.env.LINKEDIN_ID, process.env.LINKEDIN_SECRET, process.env.LINKEDIN_CALLBACK_URL);
 const paypal = require('paypal-rest-sdk');
 
 /**
@@ -16,29 +14,6 @@ const paypal = require('paypal-rest-sdk');
 exports.getApi = (req, res) => {
   res.render('api/index', {
     title: 'API Examples'
-  });
-};
-
-
-/**
- * GET /api/tumblr
- * Tumblr API example.
- */
-exports.getTumblr = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'tumblr');
-  const client = tumblr.createClient({
-    consumer_key: process.env.TUMBLR_KEY,
-    consumer_secret: process.env.TUMBLR_SECRET,
-    token: token.accessToken,
-    token_secret: token.tokenSecret
-  });
-  client.posts('mmosdotcom.tumblr.com', { type: 'photo' }, (err, data) => {
-    if (err) { return next(err); }
-    res.render('api/tumblr', {
-      title: 'Tumblr API',
-      blog: data.blog,
-      photoset: data.posts[0].photos
-    });
   });
 };
 
@@ -123,22 +98,6 @@ exports.postTwitter = (req, res, next) => {
     if (err) { return next(err); }
     req.flash('success', { msg: 'Your tweet has been posted.' });
     res.redirect('/api/twitter');
-  });
-};
-
-/**
- * GET /api/linkedin
- * LinkedIn API example.
- */
-exports.getLinkedin = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'linkedin');
-  const linkedin = Linkedin.init(token.accessToken);
-  linkedin.people.me((err, $in) => {
-    if (err) { return next(err); }
-    res.render('api/linkedin', {
-      title: 'LinkedIn API',
-      profile: $in
-    });
   });
 };
 
