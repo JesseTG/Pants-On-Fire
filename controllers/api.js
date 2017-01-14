@@ -5,7 +5,6 @@ const request = require('request');
 const cheerio = require('cheerio');
 const graph = require('fbgraph');
 const tumblr = require('tumblr.js');
-const GitHub = require('github');
 const Twit = require('twit');
 const Linkedin = require('node-linkedin')(process.env.LINKEDIN_ID, process.env.LINKEDIN_SECRET, process.env.LINKEDIN_CALLBACK_URL);
 const paypal = require('paypal-rest-sdk');
@@ -74,21 +73,6 @@ exports.getScraping = (req, res, next) => {
     res.render('api/scraping', {
       title: 'Web Scraping',
       links
-    });
-  });
-};
-
-/**
- * GET /api/github
- * GitHub API Example.
- */
-exports.getGithub = (req, res, next) => {
-  const github = new GitHub();
-  github.repos.get({ user: 'sahat', repo: 'hackathon-starter' }, (err, repo) => {
-    if (err) { return next(err); }
-    res.render('api/github', {
-      title: 'GitHub API',
-      repo
     });
   });
 };
