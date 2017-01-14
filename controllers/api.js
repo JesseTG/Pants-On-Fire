@@ -12,7 +12,6 @@ const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKE
 const Linkedin = require('node-linkedin')(process.env.LINKEDIN_ID, process.env.LINKEDIN_SECRET, process.env.LINKEDIN_CALLBACK_URL);
 const clockwork = require('clockwork')({ key: process.env.CLOCKWORK_KEY });
 const paypal = require('paypal-rest-sdk');
-const lob = require('lob')(process.env.LOB_KEY);
 
 /**
  * GET /api
@@ -336,20 +335,6 @@ exports.getPayPalCancel = (req, res) => {
   res.render('api/paypal', {
     result: true,
     canceled: true
-  });
-};
-
-/**
- * GET /api/lob
- * Lob API example.
- */
-exports.getLob = (req, res, next) => {
-  lob.routes.list({ zip_codes: ['10007'] }, (err, routes) => {
-    if (err) { return next(err); }
-    res.render('api/lob', {
-      title: 'Lob API',
-      routes: routes.data[0].routes
-    });
   });
 };
 
