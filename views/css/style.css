@@ -1,0 +1,207 @@
+/********************************
+re-size for different screens
+********************************/
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { 
+  
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) { 
+  
+}
+
+
+/******************
+Navigation
+*****************/
+
+.fun-icons {
+  font-family: 'glamocon.retrobats';
+}
+
+.navbar-brand,
+.navbar-right {
+  font-family: 'ghostwriter';
+}
+
+.navbar-brand {
+  font-size: 130%;
+}
+
+.navbar-right {
+  font-size: 120%;
+}
+
+#atom {
+  /*make float around while page is on.*/
+}
+/******************
+Jumbotron Header
+*****************/
+
+div img {
+  display: block;
+  margin: 0 auto;
+}
+
+#main-logo {
+  font-size: 300%;
+}
+
+.jumbotron p {
+  font-family: 'ghostwriter', serif;
+  font-size: 140%;
+}
+
+p {
+  font-family: 'ghostwriter', serif;
+  font-size: 120%;
+}
+
+#low-costs {
+  color: red;
+}
+
+#high-profits {
+  color: rgba(33, 108, 42, 0.9);
+}
+
+#america {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 35%;
+  border-radius: 5%;
+  font-size: 1.15em;
+}
+
+#america #ame {
+  color: red;
+}
+
+#america #ri {
+  color: white;
+}
+
+#america #ca {
+  color: blue;
+}
+
+#ai {
+  color: rgb(10, 186, 181);
+}
+
+button {
+  font-family: 'octin-spraypaint';
+}
+
+a {
+  color: rgba(40, 0, 53, 0.8);
+}
+
+.btn {
+  background-color: rgba(251, 152, 93, 0.7);
+}
+
+.jumbotron {
+  background-color: rgba(247, 243, 232, 0.8);
+  font-family: 'punk-kid';
+}
+
+.heading {
+  font-size: 300%;
+  font-family: 'punk-kid';
+  color: rgba(40, 103, 126, 0.9);
+}
+
+.asterisk {
+  color: red;
+}
+
+#header {
+  width: 75%;
+  margin: 0 auto;
+}
+
+#subtext {
+  padding-left: 40%;
+  font-size: 60%;
+}
+/******************
+Main section
+*****************/
+
+#astronaut {}
+
+#death-star {}
+
+.img-container-antenna {
+  width: 100%;
+  height: 100%;
+}
+
+#antenna {
+  width: 70%;
+  height: 70%;
+}
+
+#copywrite {
+  font-size: 50%;
+  color: grey;
+}
+/******************
+Projects
+*****************/
+/*
+When over image, turns from black and white to background of project photo.
+
+
+When clicked, 
+div circle pops and
+pop up window comes up.
+*/
+
+.projects {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background: white;
+  border-style: solid;
+  border-color: black;
+  position: relative;
+}
+
+.projects-title {
+  font-size: 1em;
+  position: relative;
+  top: 30%;
+  left: 20%;
+  width: 50%;
+}
+
+.modal-title {
+  font-family: 'octin-spraypaint';
+}
+
+#project-5-graffiti-img {
+  height: 50%;
+  width: 50%;
+}
+
+#project-5-graffiti-img + p {
+  text-align: center;
+}
+/******************
+Footer
+*****************/
+
+.footer-config {
+  font-family: 'punk-kid';
+}
+
+.panel-footer {
+  background-color: rgba(247, 243, 232, 0.8);
+}
